@@ -1,0 +1,13 @@
+.outer-div{
+    text-align: center;
+}
+
+.outer-div div{
+    display: inline-block;
+}
+.outer-div .h1{
+    display: block;
+}
+.timediv{
+    border: 2px solid black;
+}
