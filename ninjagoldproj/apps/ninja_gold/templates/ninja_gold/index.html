@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Ninja Gold</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ninja_gold/css/index.css' %}">
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="display-3">Ninja <span class="goldColor">Gold</span></h1>
+        <div class="lead">Your Gold
+            <div class="goldColor playerBank">{{gold}}</div>
+        </div>
+        <p class ='lead'>Try to earn atleast 230 Gold in 15 moves</p>
+        <div class="endShow">
+            {% if counter > 14 %}
+            {% if gold > 229 %}
+            <h1>You Win</h1>
+            {% else %}
+            <h1>You Lose</h1>
+            {% endif %}
+            <a href="reset" class = "btn btn-danger">Reset</a>
+            {% endif %}
+            
+            
+        </div>
+        
+        
+        <hr class="my-2">
+        <div class='action_grid'>
+            <form method="post" action="/process_gold/Farm">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="Farm">
+                <p>Farm</p>
+                <p class="lead">(earns)<br>(10-20 gold)</p>
+                <button type="submit" class="btn btn-primary endOff">Find Gold!</button>
+            </form>
+            <form method="post" action="/process_gold/Cave">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="Cave">
+                <p>Cave</p>
+                <p class="lead">(earns)<br>(5-10 gold)</p>
+                <button type="submit" class="btn btn-primary endOff">Find Gold!</button>
+            </form>
+            <form method="post" action="/process_gold/House">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="House">
+                <p>House</p>
+                <p class="lead">(earns)<br>(2-5 gold)</p>
+                <button type="submit" class="btn btn-primary endOff">Find Gold!</button>
+            </form>
+            <form method="post" action="/process_gold/Casino">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="Casino">
+                <p>Casino</p>
+                <p class="lead">(earns/takes)<br>(0-50 gold)</p>
+                <button type="submit" class="btn btn-primary endOff">Find Gold!</button>
+            </form>
+        </div>
+        <h2>Activities</h2>
+        <ul class="list-group">
+            {% for logs in log reversed %}
+            {% if 'Lost' in logs %}
+            <li class="list-group-item borderless log redColor">{{logs}}</li>
+            {% else %}
+            <li class="list-group-item borderless log">{{logs}}</li>
+            {% endif %}
+            {% endfor %}
+            
+        </ul>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    {% if counter > 14 %}
+    <script>
+        console.log('ending')
+            var doc = document.getElementsByClassName("endOff");
+            for (let item of doc){
+                item.disabled = true;
+            }
+    </script>
+    {% endif %}
+    
+</body>
+</html>

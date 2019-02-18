@@ -1,0 +1,44 @@
+form{
+    display: inline-block;
+    border: 2px solid black;
+    width: 20vw;
+    height: 200px;
+    margin: 0px 10px;
+    padding: 20px
+}
+
+.action_grid{
+    display: inline-block;
+    text-align: center;
+    width: 95vw;
+    margin-top: 30px
+}
+
+.goldColor{
+    color: goldenrod;
+    font-weight: bolder;
+}
+
+.playerBank{
+    display: inline-block;
+    text-align: left;
+    padding-left: 5px;
+    border: 2px solid black;
+    width: 150px;
+    height: 30px;
+    line-height: 24px;
+}
+
+ul{
+    background-color: #e9ecef;
+    border: 2px solid black;
+    color: green;
+}
+li.log{
+    background-color: #e9ecef !important;
+    margin: 0px !important;
+    border: none !important;
+}
+.redColor{
+    color: darkred;
+}
